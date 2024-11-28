@@ -11,7 +11,7 @@ public class Concesionario {
 
     public static void main(String[] args) {
         // añadir coches aleatorios para probar csv
-        // bulkCoches();
+        bulkCoches();
 
         comprobacionArchivo();
         int opcion;
@@ -86,7 +86,7 @@ public class Concesionario {
     }
 
     private static void añadirCoche(Scanner leer) {
-        System.out.println("Introduzca un id(solo 3 cifras): ");
+        System.out.println("Introduzca el ID: ");
         int id = leer.nextInt();
         leer.nextLine();
         System.out.println("Introduzca la matricula: ");
@@ -135,12 +135,17 @@ public class Concesionario {
         Scanner leer = new Scanner(System.in);
         System.out.println("Introduzca el id del coche: ");
         int id = leer.nextInt();
-        Coche coche = new Coche();
-        for (int i = coches.size(); i <= 0; i++) {
+        boolean encontrado = false;
+        for (int i = 0; i < coches.size() ; i++) {
+            Coche coche = coches.get(i);
             if (coche.getId() == id) {
                 System.out.println(coche);
+                encontrado = true;
                 break;
             }
+        }
+        if (!encontrado){
+            System.out.println("Coche no encontrado.");
         }
     }
 
@@ -174,8 +179,9 @@ public class Concesionario {
 
     // metodo para crear el csv con BufferedWriter
     private static void crearCsv() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/fichero/coches.csv"))) {
-            writer.write("ID;Matrícula;Marca;Modelo;Color\n");
+        File file = new File("src/fichero/coches.csv");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write("ID;Matricula;Marca;Modelo;Color\n");
             for (Coche coche : coches) {
                 writer.write(coche.getId() + ";" + coche.getMatricula() + ";" + coche.getMarca() + ";" + coche.getModelo() + ";" + coche.getColor() + "\n");
             }
