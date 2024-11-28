@@ -1,4 +1,4 @@
-import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -138,7 +138,7 @@ public class Concesionario {
         Coche coche = new Coche();
         for (int i = coches.size(); i <= 0; i++) {
             if (coche.getId() == id) {
-                System.out.println(coche.toString());
+                System.out.println(coche);
                 break;
             }
         }
@@ -146,8 +146,8 @@ public class Concesionario {
 
 
     private static void listarCoches() {
-        for (int i = 0; i < coches.size(); i++) {
-            System.out.println(coches.get(i));
+        for (Coche coche : coches) {
+            System.out.println(coche);
         }
     }
 
