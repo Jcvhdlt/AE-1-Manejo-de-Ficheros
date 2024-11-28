@@ -10,6 +10,7 @@ public class Concesionario {
 
 
     public static void main(String[] args) {
+
         // añadir coches aleatorios para probar csv
         bulkCoches();
 
@@ -181,7 +182,9 @@ public class Concesionario {
     private static void crearCsv() {
         File file = new File("src/fichero/coches.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            // escribimos la cabecera
             writer.write("ID;Matricula;Marca;Modelo;Color\n");
+            // recorremos otra vez el arraylist para ir obteniendo los datos de cada atributo y escribirlos en el csv
             for (Coche coche : coches) {
                 writer.write(coche.getId() + ";" + coche.getMatricula() + ";" + coche.getMarca() + ";" + coche.getModelo() + ";" + coche.getColor() + "\n");
             }
